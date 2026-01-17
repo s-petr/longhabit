@@ -8,7 +8,8 @@ const labelVariants = cva(
 )
 
 export interface LabelProps
-  extends React.ComponentProps<typeof LabelPrimitive.Root>,
+  extends
+    React.ComponentProps<typeof LabelPrimitive.Root>,
     VariantProps<typeof labelVariants> {
   disabled?: boolean
 }

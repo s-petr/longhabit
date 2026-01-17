@@ -13,7 +13,7 @@ Try the live version: https://longhabit.com
 ## Key Features
 
 ### Backend Architecture
-- Running the latest version of Pocketbase (v0.34).
+- Running the latest version of Pocketbase (v0.36).
 - Single-binary build. Uses Go's "embed" package to embed the React front-end as a file system inside the compiled binary.
 - PocketBase is installed as a Go package and used as a framework. The project makes use of many extension features including:
   - Custom hooks and middleware
@@ -76,7 +76,7 @@ Try the live version: https://longhabit.com
 
 ### Prerequisites
 - Go 1.25+
-- Node.js 24+ or Bun
+- Node.js 24+ or Bun 1.3+
 - Docker (optional)
 
 ### Installation
