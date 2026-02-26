@@ -11,3 +11,6 @@ longhabit
 
 # Database
 db
+
+# Ignore NPM package-lock.json
+package-lock.json

@@ -12,7 +12,7 @@ RUN echo "VITE_DOMAIN=${DOMAIN_NAME}\nVITE_PLAUSIBLE_API_HOST=${PLAUSIBLE_API_HO
 RUN bun run build:client
 
 # Build backend
-FROM golang:1.25-alpine AS builder-go
+FROM golang:1.26-alpine AS builder-go
 WORKDIR /app
 
 COPY --from=builder-bun /app/backend .
