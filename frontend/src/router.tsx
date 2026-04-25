@@ -244,7 +244,7 @@ export default function Router({
 }: {
   devToolsEnabled?: boolean
 }) {
-  devToolsEnabled ??= process.env.NODE_ENV === 'development'
+  devToolsEnabled ??= import.meta.env.DEV
 
   return (
     <QueryClientProvider client={queryClient}>

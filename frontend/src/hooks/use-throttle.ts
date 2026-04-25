@@ -2,7 +2,9 @@ import { AnyFunction } from '@/types/utility-types'
 import { useState } from 'react'
 
 export function useThrottle(func: AnyFunction, delay: number = 1000) {
-  const [timeout, saveTimeout] = useState<NodeJS.Timeout | null>(null)
+  const [timeout, saveTimeout] = useState<ReturnType<typeof setTimeout> | null>(
+    null
+  )
   const [isThrottled, setIsThrottled] = useState(false)
 
   const throttledFunc = (...args: any[]) => {

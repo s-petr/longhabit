@@ -9,7 +9,7 @@ import { Input } from '@/components/ui/input'
 import useAuth from '@/hooks/use-auth'
 import { cn } from '@/lib/shadcn'
 import { TrashIcon, UploadIcon } from '@radix-ui/react-icons'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useEffectEvent, useRef, useState } from 'react'
 import { FieldValues, Path, UseFormReturn } from 'react-hook-form'
 import { Avatar, AvatarImage } from '../ui/avatar'
 import { Button } from '../ui/button'
@@ -31,18 +31,20 @@ export default function UploadFileField<T extends FieldValues>({
     name.length < 2 ? name : name[0].toUpperCase() + name.slice(1).toLowerCase()
 
   const fileUploadRef = useRef<HTMLInputElement>(null)
-  const [imageFile, setImageFile] = useState<File | null>(null)
   const [previewUrl, setPreviewUrl] = useState<string | null>(null)
 
   const { user } = useAuth()
   const { avatar, id: userId } = user ?? {}
 
+  const unlinkImageRef = () => {
+    if (previewUrl && previewUrl !== 'delete') URL.revokeObjectURL(previewUrl)
+  }
+
+  const cleanupImageRef = useEffectEvent(unlinkImageRef)
+
   useEffect(() => {
-    if (!imageFile) return
-    const url = URL.createObjectURL(imageFile)
-    setPreviewUrl(url)
-    return () => URL.revokeObjectURL(url)
-  }, [imageFile])
+    return cleanupImageRef
+  }, [])
 
   return (
     <FormField
@@ -89,7 +91,7 @@ export default function UploadFileField<T extends FieldValues>({
                   role='button'
                   className='absolute top-1/2 right-2 -translate-y-1/2 cursor-pointer'
                   onClick={() => {
-                    setImageFile(null)
+                    unlinkImageRef()
                     setPreviewUrl('delete')
                     onChange(null)
                   }}>
@@ -115,8 +117,17 @@ export default function UploadFileField<T extends FieldValues>({
                     }
 
                     form.clearErrors(name)
-                    setImageFile(uploadedFile)
-                    uploadedFile && onChange(uploadedFile)
+
+                    unlinkImageRef()
+
+                    if (uploadedFile) {
+                      const newUrl = URL.createObjectURL(uploadedFile)
+                      setPreviewUrl(newUrl)
+                      onChange(uploadedFile)
+                    } else {
+                      setPreviewUrl(null)
+                      onChange(null)
+                    }
                   }}
                 />
               </div>
