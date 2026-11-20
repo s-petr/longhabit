@@ -7,12 +7,11 @@ import {
   createRootRouteWithContext,
   createRoute,
   createRouter,
+  HeadContent,
   redirect,
-  RouterProvider,
-  useMatches
+  RouterProvider
 } from '@tanstack/react-router'
 import { TanStackRouterDevtools } from '@tanstack/react-router-devtools'
-import { useEffect } from 'react'
 import { z } from 'zod/v4'
 import Spinner from './components/shared/spinner'
 import { setTheme } from './lib/set-theme'
@@ -42,31 +41,22 @@ import {
 
 interface RootContext {
   queryClient: QueryClient
-  getTitle?: () => string | Promise<string>
 }
 
-function RootLayoutWithTitle() {
-  const matches = useMatches()
-
-  useEffect(() => {
-    const breadcrumbPromises = [...matches]
-      .reverse()
-      .map((match) => {
-        const context = match.context as RootContext
-        return context.getTitle?.()
-      })
-      .filter(Boolean)
-
-    void Promise.all(breadcrumbPromises).then((titles) => {
-      document.title = titles.join(' · ')
-    })
-  }, [matches])
-
-  return <RootLayout />
+function pageHead(...titleParts: string[]) {
+  const title = [...titleParts, 'Long Habit'].join(' · ')
+  return () => ({ meta: [{ title }] })
 }
 
 const rootRoute = createRootRouteWithContext<RootContext>()({
-  component: RootLayoutWithTitle,
+  component: RootLayout,
+  shellComponent: ({ children }) => (
+    <>
+      <HeadContent />
+      {children}
+    </>
+  ),
+  head: pageHead(),
   notFoundComponent: NotFoundPage,
   errorComponent: ErrorPage,
   validateSearch: z.object({
@@ -74,11 +64,10 @@ const rootRoute = createRootRouteWithContext<RootContext>()({
   }),
 
   loader: ({ context: { queryClient } }) =>
-    queryClient.ensureQueryData(userQueryOptions),
+    queryClient.query({ ...userQueryOptions, staleTime: 'static' }),
   beforeLoad: async ({ context: { queryClient } }) => {
     const user = queryClient.getQueryData(userQueryOptions.queryKey)
     setTheme(user?.settings?.theme)
-    return { getTitle: () => 'Long Habit' }
   }
 })
 
@@ -89,7 +78,6 @@ const homeRoute = createRoute({
   pendingComponent: Spinner,
   beforeLoad: async () => {
     if (checkVerifiedUserIsLoggedIn()) throw redirect({ to: '/tasks' })
-    return { getTitle: () => '' }
   }
 })
 
@@ -98,9 +86,7 @@ const privacyPolicyRoute = createRoute({
   path: '/privacy-policy',
   component: PrivacyPolicyPage,
   pendingComponent: Spinner,
-  beforeLoad: () => {
-    return { getTitle: () => 'Privacy Policy' }
-  }
+  head: pageHead('Privacy Policy')
 })
 
 const authRoute = createRoute({
@@ -109,7 +95,6 @@ const authRoute = createRoute({
   beforeLoad: ({ location }) => {
     if (location.pathname.includes('reset-password')) return
     if (checkVerifiedUserIsLoggedIn()) throw redirect({ to: '/tasks' })
-    return { getTitle: () => '' }
   }
 })
 
@@ -117,10 +102,10 @@ const loginRoute = createRoute({
   getParentRoute: () => authRoute,
   path: 'login',
   component: LoginPage,
+  head: pageHead('Login'),
   beforeLoad: () => {
     if (checkUserIsLoggedIn() && !checkEmailIsVerified())
       throw redirect({ to: '/verify-email' })
-    return { getTitle: () => 'Login' }
   }
 })
 
@@ -128,10 +113,10 @@ const registerRoute = createRoute({
   getParentRoute: () => authRoute,
   path: 'register',
   component: RegisterPage,
+  head: pageHead('Register'),
   beforeLoad: () => {
     if (checkUserIsLoggedIn() && !checkEmailIsVerified())
       throw redirect({ to: '/verify-email' })
-    return { getTitle: () => 'Register' }
   }
 })
 
@@ -140,19 +125,17 @@ const verifyEmailRoute = createRoute({
   path: 'verify-email',
   component: VerifyEmailPage,
   validateSearch: verifyEmailParamsSchema,
-  beforeLoad: () => {
-    return { getTitle: () => 'Verify Email' }
-  }
+  head: pageHead('Verify Email')
 })
 
 const forgotPasswordRoute = createRoute({
   getParentRoute: () => authRoute,
   path: 'forgot-password',
   component: ForgotPasswordPage,
+  head: pageHead('Forgot Password'),
   beforeLoad: () => {
     if (checkUserIsLoggedIn() && !checkEmailIsVerified())
       throw redirect({ to: '/verify-email' })
-    return { getTitle: () => 'Forgot Password' }
   }
 })
 
@@ -161,7 +144,7 @@ const resetPasswordRoute = createRoute({
   path: 'reset-password',
   component: ResetPasswordPage,
   validateSearch: resetPasswordParamsSchema,
-  beforeLoad: () => ({ getTitle: () => 'Reset Password' })
+  head: pageHead('Reset Password')
 })
 
 const tasksRoute = createRoute({
@@ -169,44 +152,40 @@ const tasksRoute = createRoute({
   path: 'tasks',
   component: TasksPage,
   pendingComponent: Spinner,
+  head: pageHead('Tasks'),
   beforeLoad: () => {
     if (!checkVerifiedUserIsLoggedIn()) throw redirect({ to: '/login' })
-    return { getTitle: () => 'Tasks' }
   },
   loader: ({ context: { queryClient } }) =>
-    queryClient.ensureQueryData(tasksQueryOptions)
+    queryClient.query({ ...tasksQueryOptions, staleTime: 'static' })
 })
 
 const settingsRoute = createRoute({
   getParentRoute: () => tasksRoute,
   path: 'settings',
   component: SettingsPage,
-  beforeLoad: () => ({ getTitle: () => 'Settings' })
+  head: pageHead('Settings', 'Tasks')
 })
 
 const newTaskRoute = createRoute({
   getParentRoute: () => tasksRoute,
   path: 'new',
   component: NewTaskPage,
-  beforeLoad: () => {
-    return { getTitle: () => 'New' }
-  }
+  head: pageHead('New', 'Tasks')
 })
 
 const editTaskRoute = createRoute({
   getParentRoute: () => tasksRoute,
   path: '$taskId',
   component: EditTaskPage,
-  beforeLoad: () => {
-    return { getTitle: () => 'Edit' }
-  },
-  loader: async ({ context: { queryClient }, params: { taskId } }) => {
+  head: pageHead('Edit', 'Tasks'),
+  loader: ({ context: { queryClient }, params: { taskId } }) => {
     const taskIdValidationResult = pbIdSchema.safeParse(taskId)
     if (taskIdValidationResult.error) throw redirect({ to: '/tasks' })
-    const task = await queryClient.ensureQueryData(
-      taskQueryOptions(taskIdValidationResult.data)
-    )
-    return task
+    return queryClient.query({
+      ...taskQueryOptions(taskIdValidationResult.data),
+      staleTime: 'static'
+    })
   }
 })
 

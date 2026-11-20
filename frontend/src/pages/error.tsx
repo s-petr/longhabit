@@ -1,14 +1,16 @@
 import { Button } from '@/components/ui/button'
 import { usePlausible } from '@/context/plausible-context'
+import type { ErrorComponentProps } from '@tanstack/react-router'
 import { useRouter } from '@tanstack/react-router'
 import { useEffect } from 'react'
 
-export default function ErrorPage({ error }: { error: Error }) {
+export default function ErrorPage({ error }: ErrorComponentProps) {
   const { history } = useRouter()
   const { trackEvent } = usePlausible()
+  const errorMessage = error instanceof Error ? error.message : ''
 
   useEffect(() => {
-    trackEvent('error', { props: { error: error.message } })
+    trackEvent('error', { props: { error: errorMessage || 'Unknown error' } })
   }, [])
 
   return (
@@ -19,7 +21,7 @@ export default function ErrorPage({ error }: { error: Error }) {
       <p className='text-lg font-light sm:text-xl'>
         Something went wrong. We apologize for the inconvenience.
       </p>
-      {error.message && <p className='text-sm'>{error.message}</p>}
+      {errorMessage && <p className='text-sm'>{errorMessage}</p>}
       <Button
         variant='link'
         className='w-32 hover:no-underline'

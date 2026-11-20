@@ -42,14 +42,13 @@ const CHUNKS: Record<string, Set<string>> = {
   ])
 }
 
-function manualChunks(id: string) {
-  const match = id.match(/\/node_modules\/((?:@[^/]+\/)?[^/]+)\//)
-  if (!match) return
-  const pkg = match[1]
-  for (const [chunk, pkgs] of Object.entries(CHUNKS)) {
-    if (pkgs.has(pkg)) return chunk
+const chunkGroups = Object.entries(CHUNKS).map(([name, packages]) => ({
+  name,
+  test(id: string) {
+    const match = id.match(/\/node_modules\/((?:@[^/]+\/)?[^/]+)\//)
+    return match !== null && packages.has(match[1])
   }
-}
+}))
 
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), '')
@@ -65,7 +64,7 @@ export default defineConfig(({ mode }) => {
       outDir: './backend/dist',
       emptyOutDir: true,
       rolldownOptions: {
-        output: { manualChunks }
+        output: { codeSplitting: { groups: chunkGroups } }
       }
     },
     publicDir: './frontend/public',
