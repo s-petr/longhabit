@@ -35,7 +35,7 @@ import { cn } from '@/lib/shadcn'
 import { Task, taskSchema } from '@/schemas/task-schema'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Link, useNavigate } from '@tanstack/react-router'
-import { Resolver, useForm } from 'react-hook-form'
+import { Resolver, useForm, useWatch } from 'react-hook-form'
 
 export default function TaskForm({
   selectedTask
@@ -64,6 +64,10 @@ export default function TaskForm({
   })
 
   const fieldsEdited = form.formState.isDirty
+  const [repeatGoalEnabled, remindByEmail] = useWatch({
+    control: form.control,
+    name: ['repeatGoalEnabled', 'remindByEmail']
+  })
 
   function onSubmit(values: Task) {
     if (!fieldsEdited) {
@@ -110,7 +114,7 @@ export default function TaskForm({
           name='daysRepeat'
           label='Repeat every x days'
           min={1}
-          disabled={!form.watch('repeatGoalEnabled')}
+          disabled={!repeatGoalEnabled}
         />
 
         <SwitchField
@@ -118,7 +122,7 @@ export default function TaskForm({
           name='remindByEmail'
           label='Send reminders by email'
           hidden={!remindByEmailEnabled}
-          disabled={!remindByEmailEnabled || !form.watch('repeatGoalEnabled')}
+          disabled={!remindByEmailEnabled || !repeatGoalEnabled}
         />
 
         <InputField
@@ -129,9 +133,7 @@ export default function TaskForm({
           min={1}
           hidden={!remindByEmailEnabled}
           disabled={
-            !remindByEmailEnabled ||
-            !form.watch('repeatGoalEnabled') ||
-            !form.watch('remindByEmail')
+            !remindByEmailEnabled || !repeatGoalEnabled || !remindByEmail
           }
         />
 

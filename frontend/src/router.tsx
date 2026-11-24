@@ -8,8 +8,8 @@ import {
   createRoute,
   createRouter,
   HeadContent,
-  redirect,
-  RouterProvider
+  RouterProvider,
+  redirect
 } from '@tanstack/react-router'
 import { TanStackRouterDevtools } from '@tanstack/react-router-devtools'
 import { z } from 'zod/v4'

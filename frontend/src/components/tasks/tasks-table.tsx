@@ -25,8 +25,8 @@ import { getTaskStatusLabels, sortTaskStatusColumn } from '@/lib/task-status'
 import { CaretSortIcon, PlusIcon } from '@radix-ui/react-icons'
 import { useNavigate } from '@tanstack/react-router'
 import {
-  SortingState,
   createColumnHelper,
+  SortingState,
   useTable
 } from '@tanstack/react-table'
 import { useMemo, useState } from 'react'

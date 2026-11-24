@@ -160,7 +160,7 @@ export default function SettingsForm() {
                 Log out
               </Button>
             </DialogTrigger>
-            <DialogContent className='bg-popover sm:max-w-[300px]'>
+            <DialogContent className='bg-popover sm:max-w-75'>
               <DialogHeader>
                 <DialogTitle>Logging out</DialogTitle>
                 <DialogDescription>

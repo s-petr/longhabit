@@ -1,0 +1,86 @@
+{
+  "$schema": "https://biomejs.dev/schemas/2.6.9/schema.json",
+  "vcs": {
+    "enabled": true,
+    "clientKind": "git",
+    "useIgnoreFile": true
+  },
+  "files": {
+    "includes": ["frontend/src/**"]
+  },
+  "formatter": {
+    "indentStyle": "space",
+    "indentWidth": 2,
+    "lineWidth": 80,
+    "lineEnding": "lf",
+    "attributePosition": "auto",
+    "bracketSameLine": true
+  },
+  "javascript": {
+    "formatter": {
+      "quoteStyle": "single",
+      "jsxQuoteStyle": "single",
+      "semicolons": "asNeeded",
+      "trailingCommas": "none"
+    }
+  },
+  "css": {
+    "parser": {
+      "tailwindDirectives": true
+    },
+    "formatter": {
+      "quoteStyle": "single"
+    }
+  },
+  "tailwind": {
+    "mergeFunctions": [],
+    "variantFunctions": []
+  },
+  "linter": {
+    "rules": {
+      "preset": "none",
+      "correctness": {
+        "noChildrenProp": "error",
+        "noReactPropAssignments": "error",
+        "noRenderReturnValue": "error",
+        "noUnusedFunctionParameters": "error",
+        "noUnusedImports": "error",
+        "noUnusedVariables": {
+          "level": "error",
+          "options": {
+            "ignoreRestSiblings": false,
+            "ignoreUsingDeclarations": false
+          }
+        },
+        "useExhaustiveDependencies": "off",
+        "useHookAtTopLevel": "error",
+        "useJsxKeyInIterable": "error"
+      },
+      "nursery": {
+        "noReactDirectStateMutation": "error",
+        "useReactCompiler": "error",
+        "useTailwindSortedClasses": "warn"
+      },
+      "security": {
+        "noBlankTarget": "error",
+        "noDangerouslySetInnerHtmlWithChildren": "error"
+      },
+      "suspicious": {
+        "noCommentText": "error",
+        "noDuplicateJsxProps": "error",
+        "noReactStringRefs": "error",
+        "noUnknownAttribute": "error"
+      }
+    }
+  },
+  "assist": {
+    "actions": {
+      "source": {
+        "organizeImports": {
+          "level": "on",
+          "options": { "groups": [":ALIAS:", ":PACKAGE:", ":PATH:"] }
+        }
+      }
+    }
+  }
+}

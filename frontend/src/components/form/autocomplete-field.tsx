@@ -1,6 +1,3 @@
-import { Check, ChevronsUpDown } from 'lucide-react'
-import * as React from 'react'
-
 import { Button } from '@/components/ui/button'
 import {
   Command,
@@ -23,6 +20,8 @@ import {
   PopoverTrigger
 } from '@/components/ui/popover'
 import { cn } from '@/lib/shadcn'
+import { Check, ChevronsUpDown } from 'lucide-react'
+import * as React from 'react'
 import { FieldValues, Path, UseFormReturn } from 'react-hook-form'
 
 export default function AutoCompleteField<T extends FieldValues>({

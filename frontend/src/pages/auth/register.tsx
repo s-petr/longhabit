@@ -26,7 +26,7 @@ export default function RegisterPage() {
   const [handleRegister, isRegistering] = useThrottle(register)
 
   return (
-    <main className='mx-auto flex w-full max-w-[350px] flex-col items-center gap-y-4'>
+    <main className='mx-auto flex w-full max-w-87.5 flex-col items-center gap-y-4'>
       <h2 className='mt-4 text-4xl font-bold'>Register</h2>
       <p className='text-muted-foreground text-center text-xl font-light'>
         Enter your details to create a new account

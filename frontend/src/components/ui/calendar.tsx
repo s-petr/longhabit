@@ -7,10 +7,10 @@ import {
 } from 'lucide-react'
 import * as React from 'react'
 import {
+  type ChevronProps,
   DayButton,
   DayPicker,
   getDefaultClassNames,
-  type ChevronProps,
   type RootProps,
   type WeekNumberProps
 } from 'react-day-picker'

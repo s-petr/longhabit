@@ -39,7 +39,7 @@ Try the live version: https://longhabit.com
 
 ### Developer Experience
 - Vite dev mode with hot reload works seamlessly with PocketBase. No need to wait for PocketBase to compile. Vite and PocketBase proxy requests to and from each other while running on different ports.
-- Fully working ESlint configuration written in the new ESlint 9 format. Includes all the relevant plugins for React, Tailwind and Prettier. 
+- Biome formats the frontend and checks React, Hooks, and React Compiler rules. Configure it in [biome.json](biome.json).
 - Single-command production builds.
 - Run project locally in Docker Compose without additional configuration.
 - Compatible with any Node.js runtime (default: Bun).
@@ -91,6 +91,8 @@ Try the live version: https://longhabit.com
 ### Local Development
 
 - Start development servers `npm run dev` or `bun run dev`
+- Run `npm run lint` to type-check with TypeScript and lint `frontend/src` with Biome.
+- Run `npm run pretty` to format `frontend/src` in place, organize imports, remove unused imports, and sort Tailwind classes in JSX attributes.
  
 ### Production Build
 

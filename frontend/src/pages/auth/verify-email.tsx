@@ -38,7 +38,7 @@ export default function VerifyEmailPage() {
   )
 
   return (
-    <main className='mx-auto flex w-full max-w-[350px] flex-col items-center gap-y-4'>
+    <main className='mx-auto flex w-full max-w-87.5 flex-col items-center gap-y-4'>
       <h2 className='mt-4 text-4xl font-bold'>Verify Email</h2>
       <p className='text-muted-foreground text-xl font-light'>
         Complete your registration

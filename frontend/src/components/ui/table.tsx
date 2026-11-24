@@ -52,7 +52,7 @@ TableRow.displayName = 'TableRow'
 const TableHead = ({ className, ...props }: React.ComponentProps<'th'>) => (
   <th
     className={cn(
-      'text-muted-foreground h-12 px-4 text-left align-middle font-medium [&:has([role=checkbox])]:pr-0',
+      'text-muted-foreground h-12 px-4 text-left align-middle font-medium has-[[role=checkbox]]:pr-0',
       className
     )}
     {...props}
@@ -62,7 +62,7 @@ TableHead.displayName = 'TableHead'
 
 const TableCell = ({ className, ...props }: React.ComponentProps<'td'>) => (
   <td
-    className={cn('p-4 align-middle [&:has([role=checkbox])]:pr-0', className)}
+    className={cn('p-4 align-middle has-[[role=checkbox]]:pr-0', className)}
     {...props}
   />
 )
