@@ -1,3 +1,5 @@
+import { FieldValues, Path, UseFormReturn } from 'react-hook-form'
+
 import {
   FormControl,
   FormField,
@@ -7,7 +9,6 @@ import {
 } from '@/components/ui/form'
 import { Switch } from '@/components/ui/switch'
 import { cn } from '@/lib/shadcn'
-import { FieldValues, Path, UseFormReturn } from 'react-hook-form'
 
 export default function SwitchField<T extends FieldValues>({
   form,

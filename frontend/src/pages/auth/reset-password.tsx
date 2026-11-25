@@ -1,12 +1,13 @@
+import { zodResolver } from '@hookform/resolvers/zod'
+import { Link, useNavigate, useSearch } from '@tanstack/react-router'
+import { useForm } from 'react-hook-form'
+
 import PasswordField from '@/components/form/password-field'
 import { Button } from '@/components/ui/button'
 import { Form } from '@/components/ui/form'
 import useAuth from '@/hooks/use-auth'
 import { useThrottle } from '@/hooks/use-throttle'
 import { ResetPasswordFields, resetPasswordSchema } from '@/schemas/auth-schema'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { Link, useNavigate, useSearch } from '@tanstack/react-router'
-import { useForm } from 'react-hook-form'
 
 export default function ResetPasswordPage() {
   const { confirmPasswordReset } = useAuth()

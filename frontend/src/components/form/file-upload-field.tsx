@@ -1,3 +1,7 @@
+import { TrashIcon, UploadIcon } from '@radix-ui/react-icons'
+import { useEffect, useEffectEvent, useRef, useState } from 'react'
+import { FieldValues, Path, UseFormReturn } from 'react-hook-form'
+
 import {
   FormControl,
   FormField,
@@ -8,9 +12,6 @@ import {
 import { Input } from '@/components/ui/input'
 import useAuth from '@/hooks/use-auth'
 import { cn } from '@/lib/shadcn'
-import { TrashIcon, UploadIcon } from '@radix-ui/react-icons'
-import { useEffect, useEffectEvent, useRef, useState } from 'react'
-import { FieldValues, Path, UseFormReturn } from 'react-hook-form'
 import { Avatar, AvatarImage } from '../ui/avatar'
 import { Button } from '../ui/button'
 

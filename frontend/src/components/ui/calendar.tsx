@@ -1,5 +1,3 @@
-import { Button, buttonVariants } from '@/components/ui/button'
-import { cn } from '@/lib/shadcn'
 import {
   ChevronDownIcon,
   ChevronLeftIcon,
@@ -14,6 +12,9 @@ import {
   type RootProps,
   type WeekNumberProps
 } from 'react-day-picker'
+
+import { Button, buttonVariants } from '@/components/ui/button'
+import { cn } from '@/lib/shadcn'
 
 function Calendar({
   className,

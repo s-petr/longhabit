@@ -1,13 +1,14 @@
+import { zodResolver } from '@hookform/resolvers/zod'
+import { Link, useSearch } from '@tanstack/react-router'
+import { useEffect } from 'react'
+import { useForm } from 'react-hook-form'
+
 import InputField from '@/components/form/input-field'
 import { Button } from '@/components/ui/button'
 import { Form } from '@/components/ui/form'
 import useAuth from '@/hooks/use-auth'
 import { useThrottle } from '@/hooks/use-throttle'
 import { VerifyEmailFields, verifyEmailSchema } from '@/schemas/auth-schema'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { Link, useSearch } from '@tanstack/react-router'
-import { useEffect } from 'react'
-import { useForm } from 'react-hook-form'
 
 export default function VerifyEmailPage() {
   const {

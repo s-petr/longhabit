@@ -1,5 +1,6 @@
-import { AnyFunction } from '@/types/utility-types'
 import { useState } from 'react'
+
+import { AnyFunction } from '@/types/utility-types'
 
 export function useThrottle(func: AnyFunction, delay: number = 1000) {
   const [timeout, saveTimeout] = useState<ReturnType<typeof setTimeout> | null>(

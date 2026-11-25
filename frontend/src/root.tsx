@@ -1,5 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
+
 import { PlausibleProvider } from './context/plausible-context'
 import Router from './router'
 import './styles.css'

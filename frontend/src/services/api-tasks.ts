@@ -1,3 +1,5 @@
+import { queryOptions } from '@tanstack/react-query'
+
 import { PbId } from '@/schemas/pb-schema'
 import {
   categoryListSchema,
@@ -6,7 +8,6 @@ import {
   taskListSchema,
   taskSchema
 } from '@/schemas/task-schema'
-import { queryOptions } from '@tanstack/react-query'
 import { pb } from './pocketbase'
 
 export async function getAllTasks() {

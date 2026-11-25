@@ -1,3 +1,7 @@
+import { zodResolver } from '@hookform/resolvers/zod'
+import { Link } from '@tanstack/react-router'
+import { useForm } from 'react-hook-form'
+
 import InputField from '@/components/form/input-field'
 import PasswordField from '@/components/form/password-field'
 import { GoogleLogo } from '@/components/shared/logos'
@@ -6,9 +10,6 @@ import { Form } from '@/components/ui/form'
 import useAuth from '@/hooks/use-auth'
 import { useThrottle } from '@/hooks/use-throttle'
 import { LoginFields, loginSchema } from '@/schemas/auth-schema'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { Link } from '@tanstack/react-router'
-import { useForm } from 'react-hook-form'
 
 export default function LoginPage() {
   const { loginWithPassword, loginWithGoogle } = useAuth()

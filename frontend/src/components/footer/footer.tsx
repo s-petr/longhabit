@@ -1,6 +1,7 @@
-import ScrollToTopButton from '@/components/footer/scroll-to-top'
 import { GitHubLogoIcon } from '@radix-ui/react-icons'
 import { Link } from '@tanstack/react-router'
+
+import ScrollToTopButton from '@/components/footer/scroll-to-top'
 
 export default function Footer() {
   return (

@@ -1,5 +1,6 @@
-import { taskHistoryDateSchema } from '@/schemas/task-schema'
 import { addDays, format, isValid } from 'date-fns'
+
+import { taskHistoryDateSchema } from '@/schemas/task-schema'
 
 export function stringToDate(dateString: string) {
   const parsedDateString = taskHistoryDateSchema.parse(dateString)

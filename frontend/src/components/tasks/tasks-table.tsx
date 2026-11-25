@@ -1,3 +1,12 @@
+import { CaretSortIcon, PlusIcon } from '@radix-ui/react-icons'
+import { useNavigate } from '@tanstack/react-router'
+import {
+  createColumnHelper,
+  SortingState,
+  useTable
+} from '@tanstack/react-table'
+import { useMemo, useState } from 'react'
+
 import {
   TasksTableFeatures,
   tasksTableFeatures
@@ -22,14 +31,6 @@ import {
 } from '@/components/ui/table'
 import { cn } from '@/lib/shadcn'
 import { getTaskStatusLabels, sortTaskStatusColumn } from '@/lib/task-status'
-import { CaretSortIcon, PlusIcon } from '@radix-ui/react-icons'
-import { useNavigate } from '@tanstack/react-router'
-import {
-  createColumnHelper,
-  SortingState,
-  useTable
-} from '@tanstack/react-table'
-import { useMemo, useState } from 'react'
 import { Task } from '../../schemas/task-schema'
 import TaskColumnDisplay from './task-column'
 import { TaskDone } from './task-done'

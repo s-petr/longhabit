@@ -1,6 +1,7 @@
-import { cn } from '@/lib/shadcn'
 import * as PopoverPrimitive from '@radix-ui/react-popover'
 import * as React from 'react'
+
+import { cn } from '@/lib/shadcn'
 
 const Popover = PopoverPrimitive.Root
 const PopoverTrigger = PopoverPrimitive.Trigger

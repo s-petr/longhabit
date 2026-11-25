@@ -1,3 +1,7 @@
+import { EyeClosedIcon, EyeOpenIcon } from '@radix-ui/react-icons'
+import { useState } from 'react'
+import { FieldValues, Path, UseFormReturn } from 'react-hook-form'
+
 import {
   FormControl,
   FormField,
@@ -7,9 +11,6 @@ import {
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { cn } from '@/lib/shadcn'
-import { EyeClosedIcon, EyeOpenIcon } from '@radix-ui/react-icons'
-import { useState } from 'react'
-import { FieldValues, Path, UseFormReturn } from 'react-hook-form'
 
 export default function PasswordField<T extends FieldValues>({
   form,

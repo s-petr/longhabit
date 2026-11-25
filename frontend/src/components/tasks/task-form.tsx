@@ -1,3 +1,7 @@
+import { zodResolver } from '@hookform/resolvers/zod'
+import { Link, useNavigate } from '@tanstack/react-router'
+import { Resolver, useForm, useWatch } from 'react-hook-form'
+
 import AutoCompleteField from '@/components/form/autocomplete-field'
 import InputField from '@/components/form/input-field'
 import SwitchField from '@/components/form/switch-field'
@@ -33,9 +37,6 @@ import useSettings from '@/hooks/use-settings'
 import useTasks from '@/hooks/use-tasks'
 import { cn } from '@/lib/shadcn'
 import { Task, taskSchema } from '@/schemas/task-schema'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { Link, useNavigate } from '@tanstack/react-router'
-import { Resolver, useForm, useWatch } from 'react-hook-form'
 
 export default function TaskForm({
   selectedTask

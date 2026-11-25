@@ -1,3 +1,8 @@
+import { zodResolver } from '@hookform/resolvers/zod'
+import { Link } from '@tanstack/react-router'
+import { useEffect } from 'react'
+import { useForm } from 'react-hook-form'
+
 import InputField from '@/components/form/input-field'
 import { Button } from '@/components/ui/button'
 import { Form } from '@/components/ui/form'
@@ -6,10 +11,6 @@ import {
   ForgotPasswordFields,
   forgotPasswordSchema
 } from '@/schemas/auth-schema'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { Link } from '@tanstack/react-router'
-import { useEffect } from 'react'
-import { useForm } from 'react-hook-form'
 
 export default function ForgotPasswordPage() {
   const { requestPasswordReset, emailSendCountdown, startEmailSendCountdown } =

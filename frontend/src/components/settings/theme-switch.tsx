@@ -1,7 +1,8 @@
+import { DesktopIcon, MoonIcon, SunIcon } from '@radix-ui/react-icons'
+
 import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group'
 import { setTheme } from '@/lib/set-theme'
 import { Theme } from '@/schemas/settings-schema'
-import { DesktopIcon, MoonIcon, SunIcon } from '@radix-ui/react-icons'
 
 export default function ThemeSwitch({
   theme,

@@ -1,14 +1,15 @@
-import { usePlausible } from '@/context/plausible-context'
-import { errorToast, successToast } from '@/lib/toast'
-import { UpdateUserSettingsFields } from '@/schemas/user-schema'
-import { userQueryOptions } from '@/services/api-auth'
-import { updateUserSettings } from '@/services/api-settings'
 import {
   useMutation,
   useQueryClient,
   useSuspenseQuery
 } from '@tanstack/react-query'
 import { useNavigate } from '@tanstack/react-router'
+
+import { usePlausible } from '@/context/plausible-context'
+import { errorToast, successToast } from '@/lib/toast'
+import { UpdateUserSettingsFields } from '@/schemas/user-schema'
+import { userQueryOptions } from '@/services/api-auth'
+import { updateUserSettings } from '@/services/api-settings'
 
 export default function useSettings() {
   const navigate = useNavigate()

@@ -1,3 +1,10 @@
+import {
+  useMutation,
+  useQueryClient,
+  useSuspenseQuery
+} from '@tanstack/react-query'
+import { useNavigate } from '@tanstack/react-router'
+
 import { usePlausible } from '@/context/plausible-context'
 import { errorToast, successToast } from '@/lib/toast'
 import { Task } from '@/schemas/task-schema'
@@ -9,12 +16,6 @@ import {
   updateTask as updateTaskApi,
   updateTaskHistory as updateTaskHistoryApi
 } from '@/services/api-tasks'
-import {
-  useMutation,
-  useQueryClient,
-  useSuspenseQuery
-} from '@tanstack/react-query'
-import { useNavigate } from '@tanstack/react-router'
 
 export default function useTasks() {
   const queryClient = useQueryClient()

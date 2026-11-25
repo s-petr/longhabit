@@ -1,8 +1,9 @@
-import { Button } from '@/components/ui/button'
-import { usePlausible } from '@/context/plausible-context'
 import type { ErrorComponentProps } from '@tanstack/react-router'
 import { useRouter } from '@tanstack/react-router'
 import { useEffect } from 'react'
+
+import { Button } from '@/components/ui/button'
+import { usePlausible } from '@/context/plausible-context'
 
 export default function ErrorPage({ error }: ErrorComponentProps) {
   const { history } = useRouter()

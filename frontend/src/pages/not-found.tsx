@@ -1,7 +1,8 @@
-import { Button } from '@/components/ui/button'
-import { usePlausible } from '@/context/plausible-context'
 import { useLocation, useRouter } from '@tanstack/react-router'
 import { useEffect } from 'react'
+
+import { Button } from '@/components/ui/button'
+import { usePlausible } from '@/context/plausible-context'
 
 export default function NotFoundPage() {
   const { history } = useRouter()

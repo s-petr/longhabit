@@ -1,6 +1,3 @@
-import NotFoundPage from '@/pages/not-found'
-import RootLayout from '@/root-layout'
-import { taskQueryOptions, tasksQueryOptions } from '@/services/api-tasks'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import {
@@ -13,6 +10,10 @@ import {
 } from '@tanstack/react-router'
 import { TanStackRouterDevtools } from '@tanstack/react-router-devtools'
 import { z } from 'zod/v4'
+
+import NotFoundPage from '@/pages/not-found'
+import RootLayout from '@/root-layout'
+import { taskQueryOptions, tasksQueryOptions } from '@/services/api-tasks'
 import Spinner from './components/shared/spinner'
 import { setTheme } from './lib/set-theme'
 import ForgotPasswordPage from './pages/auth/forgot-password'

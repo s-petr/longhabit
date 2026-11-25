@@ -1,3 +1,7 @@
+import { useQueryClient, useSuspenseQuery } from '@tanstack/react-query'
+import { useRouter } from '@tanstack/react-router'
+import { useState } from 'react'
+
 import { usePlausible } from '@/context/plausible-context'
 import { errorToast, successToast } from '@/lib/toast'
 import { RegisterFields } from '@/schemas/auth-schema'
@@ -16,9 +20,6 @@ import {
   userQueryOptions,
   verifyEmailByToken as verifyEmailByTokenApi
 } from '@/services/api-auth'
-import { useQueryClient, useSuspenseQuery } from '@tanstack/react-query'
-import { useRouter } from '@tanstack/react-router'
-import { useState } from 'react'
 
 export default function useAuth() {
   const [emailSendCountdown, setEmailSendCountdown] = useState(0)

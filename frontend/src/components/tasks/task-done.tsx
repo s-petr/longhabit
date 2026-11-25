@@ -1,8 +1,9 @@
+import { CheckCircledIcon } from '@radix-ui/react-icons'
+
 import useTasks from '@/hooks/use-tasks'
 import { dateToString } from '@/lib/date-convert'
 import { cn } from '@/lib/shadcn'
 import { Task } from '@/schemas/task-schema'
-import { CheckCircledIcon } from '@radix-ui/react-icons'
 
 export function TaskDone({ task }: { task: Task }) {
   const today = dateToString()

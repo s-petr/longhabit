@@ -1,6 +1,7 @@
-import { cn } from '@/lib/shadcn'
 import { ChevronUpIcon } from '@radix-ui/react-icons'
 import { useEffect, useState } from 'react'
+
+import { cn } from '@/lib/shadcn'
 import { Button } from '../ui/button'
 
 export default function ScrollToTopButton({

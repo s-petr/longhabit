@@ -1,9 +1,10 @@
+import { useSuspenseQuery } from '@tanstack/react-query'
+import { useParams } from '@tanstack/react-router'
+
 import TaskForm from '@/components/tasks/task-form'
 import { SheetContent } from '@/components/ui/sheet'
 import { taskSchema } from '@/schemas/task-schema'
 import { taskQueryOptions } from '@/services/api-tasks'
-import { useSuspenseQuery } from '@tanstack/react-query'
-import { useParams } from '@tanstack/react-router'
 
 export default function EditTaskPage() {
   const { taskId } = useParams({ from: '/tasks/$taskId' })

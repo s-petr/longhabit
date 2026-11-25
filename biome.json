@@ -78,7 +78,9 @@
       "source": {
         "organizeImports": {
           "level": "on",
-          "options": { "groups": [":ALIAS:", ":PACKAGE:", ":PATH:"] }
+          "options": {
+            "groups": [":PACKAGE:", ":BLANK_LINE:", ":ALIAS:", ":PATH:"]
+          }
         }
       }
     }

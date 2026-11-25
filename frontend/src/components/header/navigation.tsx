@@ -1,6 +1,7 @@
+import { Link, useLocation } from '@tanstack/react-router'
+
 import { Avatar, AvatarImage } from '@/components/ui/avatar'
 import useAuth from '@/hooks/use-auth'
-import { Link, useLocation } from '@tanstack/react-router'
 import { DefaultUserAvatarLogo, LongHabitMainLogo } from '../shared/logos'
 
 export default function Navigation() {

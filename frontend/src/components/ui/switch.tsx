@@ -1,6 +1,7 @@
-import { cn } from '@/lib/shadcn'
 import * as SwitchPrimitives from '@radix-ui/react-switch'
 import * as React from 'react'
+
+import { cn } from '@/lib/shadcn'
 
 const Switch = ({
   className,

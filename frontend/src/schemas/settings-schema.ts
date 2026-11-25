@@ -1,4 +1,5 @@
 import { z } from 'zod/v4'
+
 import { pbIdSchema } from './pb-schema'
 
 export const themeSchema = z.enum(['system', 'light', 'dark'])
