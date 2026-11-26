@@ -1,18 +1,23 @@
-import { addDays, format, isValid } from 'date-fns'
+import { addDays, format, isValid, parse } from 'date-fns'
 
-import { taskHistoryDateSchema } from '@/schemas/task-schema'
+import {
+  taskHistoryDateFormat,
+  taskHistoryDateSchema
+} from '@/schemas/task-schema'
 
 export function stringToDate(dateString: string) {
-  const parsedDateString = taskHistoryDateSchema.parse(dateString)
-  const date = new Date(parsedDateString)
-  return date
+  return parse(
+    taskHistoryDateSchema.parse(dateString),
+    taskHistoryDateFormat,
+    new Date()
+  )
 }
 
 export function dateToString(date: Date = new Date()) {
   if (!(date instanceof Date) || !isValid(date))
     throw new Error('Invalid Date object provided')
 
-  return format(date, 'yyyy-MM-dd')
+  return format(date, taskHistoryDateFormat)
 }
 
 export function getNextDueDate(history: string[], daysRepeat: number) {

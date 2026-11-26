@@ -11,8 +11,7 @@ export function TaskDone({ task }: { task: Task }) {
 
   const { updateTaskHistory } = useTasks()
 
-  const handleCheck = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.stopPropagation()
+  const handleCheck = () => {
     const history = task.history || []
     const updatedHistory = doneToday
       ? history.filter((date) => date !== today)
@@ -24,9 +23,10 @@ export function TaskDone({ task }: { task: Task }) {
   return (
     <button
       type='button'
-      aria-label='Mark as done'
+      aria-label={`Completed today: ${task.name}`}
+      aria-pressed={doneToday}
       className={cn(
-        'flex size-8 cursor-pointer items-center justify-center rounded-full transition-all duration-75 ease-in-out',
+        'relative z-10 flex size-8 cursor-pointer items-center justify-center rounded-full transition-all duration-75 ease-in-out focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring',
         doneToday
           ? 'bg-primary hover:bg-primary/90'
           : 'bg-secondary/75 hover:bg-secondary'

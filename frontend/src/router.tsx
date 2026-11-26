@@ -64,11 +64,10 @@ const rootRoute = createRootRouteWithContext<RootContext>()({
     logout: z.boolean().optional()
   }),
 
-  loader: ({ context: { queryClient } }) =>
-    queryClient.query({ ...userQueryOptions, staleTime: 'static' }),
   beforeLoad: async ({ context: { queryClient } }) => {
     const user = queryClient.getQueryData(userQueryOptions.queryKey)
     setTheme(user?.settings?.theme)
+    await queryClient.query({ ...userQueryOptions, staleTime: 'static' })
   }
 })
 

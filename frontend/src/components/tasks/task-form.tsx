@@ -1,5 +1,6 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Link, useNavigate } from '@tanstack/react-router'
+import { useRef } from 'react'
 import { Resolver, useForm, useWatch } from 'react-hook-form'
 
 import AutoCompleteField from '@/components/form/autocomplete-field'
@@ -44,6 +45,7 @@ export default function TaskForm({
   selectedTask?: Task | null | undefined
 }) {
   const navigate = useNavigate()
+  const cancelDeleteRef = useRef<HTMLButtonElement>(null)
   const { createTask, updateTask, deleteTask } = useTasks()
   const { user } = useAuth()
 
@@ -169,9 +171,10 @@ export default function TaskForm({
               </DialogTrigger>
               <DialogContent
                 className='bg-popover sm:max-w-75'
-                onKeyDown={(event) =>
-                  event.key === 'Enter' && deleteTask(selectedTask)
-                }>
+                onOpenAutoFocus={(event) => {
+                  event.preventDefault()
+                  cancelDeleteRef.current?.focus()
+                }}>
                 <DialogHeader>
                   <DialogTitle>Delete Task</DialogTitle>
                   <DialogDescription>
@@ -182,6 +185,7 @@ export default function TaskForm({
 
                 <DialogFooter className='flex items-center gap-4 sm:justify-between'>
                   <Button
+                    type='button'
                     className='w-full'
                     variant='destructive'
                     onClick={() => deleteTask(selectedTask)}>
@@ -189,6 +193,7 @@ export default function TaskForm({
                   </Button>
                   <DialogClose asChild>
                     <Button
+                      ref={cancelDeleteRef}
                       type='button'
                       className='w-full'
                       variant='secondary'>

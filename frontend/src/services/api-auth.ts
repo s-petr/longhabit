@@ -1,4 +1,5 @@
 import { queryOptions } from '@tanstack/react-query'
+import { ClientResponseError } from 'pocketbase'
 
 import { setTheme } from '@/lib/set-theme'
 import { User, userSchema, userWithSettingsSchema } from '@/schemas/user-schema'
@@ -102,14 +103,19 @@ export async function unsubscribeFromUserChanges() {
 
 export const userQueryOptions = queryOptions({
   queryKey: ['user'],
+  networkMode: 'offlineFirst',
   queryFn: async () => {
     if (!checkUserIsLoggedIn()) return null
 
     try {
       await authRefresh()
-    } catch {
-      logout()
-      return null
+    } catch (error) {
+      // PocketBase clears the rejected token before reporting a 401.
+      if (error instanceof ClientResponseError && error.status === 401)
+        return null
+      throw new Error('Could not refresh your session. Please try again.', {
+        cause: error
+      })
     }
 
     const settings = await pb

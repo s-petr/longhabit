@@ -211,9 +211,8 @@ export function TasksTable({ tasks }: { tasks: Task[] }) {
               table.getRowModel().rows.map((row) => (
                 <TableRow
                   key={row.id}
-                  className='hover:bg-popover/50 cursor-pointer border-none'
-                  data-state={row.getIsSelected() && 'selected'}
-                  onClick={() => navigate({ to: `/tasks/${row.original.id}` })}>
+                  className='hover:bg-popover/50 relative border-none'
+                  data-state={row.getIsSelected() && 'selected'}>
                   {row.getVisibleCells().map((cell, index, array) => (
                     <TableCell
                       key={cell.id}

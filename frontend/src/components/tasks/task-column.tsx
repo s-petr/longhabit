@@ -1,4 +1,5 @@
 import { EnvelopeClosedIcon } from '@radix-ui/react-icons'
+import { Link } from '@tanstack/react-router'
 import { Row } from '@tanstack/react-table'
 
 import { TasksTableFeatures } from '@/components/tasks/tasks-table-features'
@@ -23,7 +24,16 @@ export default function TaskColumnDisplay({
   return (
     <div>
       <p className='text-muted-foreground text-left text-sm font-light'>
-        {taskName}
+        {row.original.id ? (
+          <Link
+            to='/tasks/$taskId'
+            params={{ taskId: row.original.id }}
+            className='focus-visible:outline-ring rounded-sm underline-offset-2 after:absolute after:inset-0 focus-visible:outline-2 focus-visible:outline-offset-2'>
+            {taskName}
+          </Link>
+        ) : (
+          taskName
+        )}
       </p>
       <p
         className={cn(

@@ -3,9 +3,11 @@ import { z } from 'zod/v4'
 
 import { pbIdSchema } from './pb-schema'
 
+export const taskHistoryDateFormat = 'yyyy-MM-dd'
+
 export const taskHistoryDateSchema = z.string().refine((date) => {
   try {
-    const parsedDate = parse(date, 'yyyy-MM-dd', new Date())
+    const parsedDate = parse(date, taskHistoryDateFormat, new Date())
     return isValid(parsedDate)
   } catch {
     return false
