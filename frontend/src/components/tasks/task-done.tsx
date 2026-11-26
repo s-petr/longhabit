@@ -26,7 +26,7 @@ export function TaskDone({ task }: { task: Task }) {
       aria-label={`Completed today: ${task.name}`}
       aria-pressed={doneToday}
       className={cn(
-        'relative z-10 flex size-8 cursor-pointer items-center justify-center rounded-full transition-all duration-75 ease-in-out focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring',
+        'relative z-10 flex size-8 cursor-pointer items-center justify-center rounded-full transition-all duration-75 ease-in-out focus-visible:outline-2 focus-visible:outline-offset-2 outline-ring',
         doneToday
           ? 'bg-primary hover:bg-primary/90'
           : 'bg-secondary/75 hover:bg-secondary'
@@ -38,3 +38,5 @@ export function TaskDone({ task }: { task: Task }) {
     </button>
   )
 }
+
+//
